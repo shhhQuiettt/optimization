@@ -1,6 +1,6 @@
 from typing import Protocol
-from solution import OptimizationSolution
-from algorithm import OptimizationAlgorithm
+from .solution import OptimizationSolution
+from .algorithm import OptimizationAlgorithm
 
 
 class OptimizationProblem(Protocol):
@@ -12,3 +12,6 @@ class OptimizationProblem(Protocol):
 
     def holds_constraints(self, solution: OptimizationSolution) -> bool:
         return True
+
+    def get_random_solution(self) -> OptimizationSolution:
+        ...

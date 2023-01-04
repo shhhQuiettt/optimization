@@ -7,5 +7,5 @@ class OptimizationAlgorithm(ABC):
     problem = None
 
     @abstractmethod
-    def perform(self):
+    def perform(self) -> None:
         pass
