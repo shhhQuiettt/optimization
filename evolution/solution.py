@@ -4,8 +4,6 @@ from optimization.core.solution import OptimizationSolution
 from typing import Any, Tuple
 from dataclasses import dataclass
 
-print(sklearn.__version__)
-
 
 @dataclass
 class EvolutionarySolution(OptimizationSolution):
