@@ -1,6 +1,5 @@
 from .algorithm import EvolutionaryAlgorithm
 from optimization.core.problem import OptimizationProblem
-from attrs import define
 from typing import List
 from .solution import EvolutionarySolution
 from .selection import SelectionStrategy
