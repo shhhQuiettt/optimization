@@ -1,16 +1,14 @@
 from .algorithm import EvolutionaryAlgorithm
-from optimization.core.problem import OptimizationProblem
 from typing import List
-from .solution import EvolutionarySolution
+from .solution import EvolutionarySolution, RandomSolutionStrategy
 from .selection import SelectionStrategy
 import random
 
 
 class SteadyGeneticAlgorithm(EvolutionaryAlgorithm):
-    problem: OptimizationProblem
-    solution_class: EvolutionarySolution
+    # solution_class: EvolutionarySolution
 
-    population: List[EvolutionarySolution]
+    population: List[EvolutionarySolution] = []
     population_size: int
 
     mutation_chance: float
@@ -20,6 +18,7 @@ class SteadyGeneticAlgorithm(EvolutionaryAlgorithm):
     max_iterations: int = 10_000
 
     selection_strategy: SelectionStrategy
+    random_solution_strategy: RandomSolutionStrategy
 
     _iterations = 0
     _iteration_without_improvement = 0
@@ -52,10 +51,7 @@ class SteadyGeneticAlgorithm(EvolutionaryAlgorithm):
 
     def initialize_population(self) -> List[EvolutionarySolution]:
         return [
-            self.solution_class.from_optimization_solution(
-                self.problem.get_random_solution()
-            )
-            for _ in range(self.population_size)
+            self.random_solution_strategy.get() for _ in range(self.population_size)
         ]
 
     def should_iterate(self) -> bool:

@@ -7,6 +7,9 @@ class OptimizationProblem(Protocol):
 
     optimization_algorithm: OptimizationAlgorithm
 
+    def set_optimization_algorithm(self, optimization_algorithm: OptimizationAlgorithm) -> None:
+        pass
+
     def evaluate_fitness(self, solution: OptimizationSolution) -> float:
         ...
 

@@ -1,14 +1,13 @@
 from __future__ import annotations
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 from optimization.core.solution import OptimizationSolution
-from typing import Any, Tuple
+from typing import Any, Tuple, Callable
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(kw_only=True)
 class EvolutionarySolution(OptimizationSolution):
     value: Any
-    fitness: float
     age: int = 0
 
     @abstractmethod
@@ -25,4 +24,10 @@ class EvolutionarySolution(OptimizationSolution):
     def from_optimization_solution(
         cls, solution: OptimizationSolution
     ) -> EvolutionarySolution:
-        return cls(value=solution.value, fitness=solution.fitness)
+        return cls(value=solution.value)
+
+
+class RandomSolutionStrategy(ABC):
+    @abstractmethod
+    def get(self) -> EvolutionarySolution:
+        pass
