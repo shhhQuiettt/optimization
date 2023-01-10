@@ -21,9 +21,11 @@ class Tournament(SelectionStrategy):
         self, population: List[EvolutionarySolution]
     ) -> EvolutionarySolution:
 
-        participants = [
-            population.pop(random.randrange(len(population)))
-            for _ in range(self.tournament_size)
-        ]
-
-        return max(participants, key=lambda x: x.fitness)
+        participants_indexes = random.sample(
+            range(len(population)), self.tournament_size
+        )
+        best_participant_index = max(
+            participants_indexes, key=lambda idx: population[idx].fitness
+        )
+        population.pop(best_participant_index)
+        return population[best_participant_index]
