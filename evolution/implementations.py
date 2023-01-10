@@ -8,7 +8,7 @@ import random
 class SteadyGeneticAlgorithm(EvolutionaryAlgorithm):
     # solution_class: EvolutionarySolution
 
-    population: List[EvolutionarySolution] = []
+    population: List[EvolutionarySolution] | None = None
     population_size: int
 
     mutation_chance: float
@@ -25,6 +25,7 @@ class SteadyGeneticAlgorithm(EvolutionaryAlgorithm):
 
     def perform(self) -> None:
         self.initialize_population()
+
         while self.should_iterate():
             self._iterations += 1
 
@@ -49,8 +50,8 @@ class SteadyGeneticAlgorithm(EvolutionaryAlgorithm):
             else:
                 self._iteration_without_improvement += 1
 
-    def initialize_population(self) -> List[EvolutionarySolution]:
-        return [
+    def initialize_population(self) -> None:
+        self.population = [
             self.random_solution_strategy.get() for _ in range(self.population_size)
         ]
 
